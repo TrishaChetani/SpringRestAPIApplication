@@ -11,7 +11,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.util.List;
 
-@CrossOrigin(origins = "*", maxAge = 3600,allowedHeaders =("*"),exposedHeaders = ("*") )
+
 @RestController
 @RequestMapping("/ticket")
 public class TicketController {
