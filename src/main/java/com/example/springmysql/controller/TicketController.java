@@ -12,7 +12,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 
-
 @RestController
 @RequestMapping("/ticket")
 public class TicketController {
