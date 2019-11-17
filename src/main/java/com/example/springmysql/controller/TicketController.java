@@ -36,7 +36,7 @@ public class TicketController {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**").allowedMethods("GET", "POST", "PUT", "DELETE","OPTIONS","HEAD","PATCH").allowedOrigins("*")
-                        .allowedHeaders("*").exposedHeaders("*").;
+                        .allowedHeaders("*").exposedHeaders("*");
             }
         };
     }
