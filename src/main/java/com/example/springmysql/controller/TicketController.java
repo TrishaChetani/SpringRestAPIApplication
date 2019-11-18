@@ -14,19 +14,18 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/ticket")
+@CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
 public class TicketController {
     @Autowired
     private TicketDao dao;
 
     @PostMapping("/bookTickets")
-    @CrossOrigin(origins = "*", maxAge = 3600,allowedHeaders =("*"),exposedHeaders = ("*"))
     public String bookTicket(@RequestBody List<Ticket> ticket){
         dao.saveAll(ticket);
         return "ticket booked :" + ticket.size();
     }
 
     @GetMapping("/getTickets")
-    @CrossOrigin(origins = "*", maxAge = 3600,allowedHeaders =("*"),exposedHeaders = ("*"))
     public List <Ticket> getTickets(){
         return (List<Ticket>) dao.findAll();
     }
