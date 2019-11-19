@@ -7,7 +7,6 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @SpringBootApplication
 public class SpringMysqlApplication {
-
     public static void main(String[] args) {
         SpringApplication.run(SpringMysqlApplication.class, args);
     }

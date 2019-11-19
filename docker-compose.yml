@@ -1,28 +1,27 @@
 version: '3'
 services:
   app:
-    #restart: always
+    restart: on-failure
     build: .
-    working_dir: /app
     ports:
       - '9090:9090'
-    command: './mvnw clean spring-boot:run'
-    links:
+    depends_on:
       - mysql
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ticket
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: password
   mysql:
     container_name: some-mysql
-    image: 'mysql/mysql-server:5.7'
+    image: mysql:latest
     environment:
       MYSQL_DATABASE: ticket
-      MYSQL_USER: 'user'
-      MYSQL_PASSWORD: 'password'
-      MYSQL_ROOT_PASSWORD: 'password'
-      SPRING_JDBC_URL: jdbc:mysql://mysql:3306/ticket
+     # MYSQL_USER: test
+    #  MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - '3306:3306'
     restart: always
-    volumes:
-      - my-db:/var/lib/mysql
-    # Names our volume
-volumes:
-      my-db:
+
+
+
