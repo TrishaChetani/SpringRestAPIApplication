@@ -1,23 +1,28 @@
 package com.example.springmysql.model;
-
 import lombok.*;
 
-import javax.persistence.Entity;
+import org.springframework.data.annotation.Id;
+
+
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
+
 import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity
-@Getter
-@Setter
+@Table(name ="ticket")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-@Table(name ="Ticket")
+
 public class Ticket {
     @Id
     @GeneratedValue
     private int id;
     private int amount;
     private String category;
+
 }

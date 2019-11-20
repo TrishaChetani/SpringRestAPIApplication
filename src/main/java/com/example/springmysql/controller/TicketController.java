@@ -1,33 +1,51 @@
 package com.example.springmysql.controller;
 
-import com.example.springmysql.dao.TicketDao;
-import com.example.springmysql.model.Ticket;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.data.repository.CrudRepository;
-import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
 import java.util.List;
+
+import com.example.springmysql.model.Ticket;
+import com.example.springmysql.service.TicketService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.RequestMethod;
+
+
 
 
 @RestController
-@RequestMapping("/ticket")
-@CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
 public class TicketController {
+
     @Autowired
-    private TicketDao dao;
+    private TicketService service;
 
     @PostMapping("/bookTickets")
-    public String bookTicket(@RequestBody List<Ticket> ticket){
-        dao.saveAll(ticket);
-        return "ticket booked :" + ticket.size();
+    @CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
+    public Ticket bookTicket(@RequestBody Ticket ticket){
+        return service.addTicket(ticket);
+
     }
 
     @GetMapping("/getTickets")
-    public List <Ticket> getTickets(){
-        return (List<Ticket>) dao.findAll();
+    @CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
+    public List <Ticket> getAllTickets(){
+        return (List<Ticket>) service.getTicket();
+    }
+
+    @GetMapping("/getTicketByAddress/{address}")
+    public List<Ticket> findTicketByAddress(@PathVariable String address) {
+        return service.getTicketByAddress(address);
+    }
+
+    @DeleteMapping(value = "/remove")
+    @CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
+    public Ticket removeTicket(@RequestBody Ticket ticket){
+        service.deleteTicket(ticket);
+        return ticket;
     }
 }
 

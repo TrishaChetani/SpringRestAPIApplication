@@ -5,11 +5,10 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-@AutoConfigureTestDatabase
 class SpringMysqlApplicationTests {
 
     @Test
-    void contextLoads() {
+    void test() {
     }
 
 }
