@@ -1,14 +1,16 @@
 package com.example.springmysql;
 
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
+
+import org.junit.Test;
+import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
 
 @SpringBootTest
-class SpringMysqlApplicationTests {
+public class SpringMysqlApplicationTests {
 
     @Test
-    void test() {
+    public void contextLoads() {
     }
 
 }

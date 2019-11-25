@@ -33,19 +33,20 @@ public class TicketController {
     @GetMapping("/getTickets")
     @CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
     public List <Ticket> getAllTickets(){
-        return (List<Ticket>) service.getTicket();
+
+        return service.getTicket();
     }
 
-    @GetMapping("/getTicketByAddress/{address}")
-    public List<Ticket> findTicketByAddress(@PathVariable String address) {
-        return service.getTicketByAddress(address);
+    @GetMapping("/getTicketByCategory/{category}")
+    public List<Ticket> findTicketByCategory(@PathVariable(required = true) String category) {
+        return service.getTicketByCategory(category);
     }
 
-    @DeleteMapping(value = "/remove")
+    @DeleteMapping(value = "/remove/{id}")
     @CrossOrigin(origins = "*", maxAge = 3600, methods= {RequestMethod.GET, RequestMethod.POST,RequestMethod.OPTIONS,RequestMethod.HEAD})
-    public Ticket removeTicket(@RequestBody Ticket ticket){
-        service.deleteTicket(ticket);
-        return ticket;
+    public void removeTicket(@PathVariable(required = true) Integer id){
+         service.deleteTicket(id);
+
     }
 }
 
