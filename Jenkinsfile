@@ -53,7 +53,7 @@ pipeline {
          steps {
         parallel(
           "Unit Test": {
-            echo 'mvn test -P unit-test'
+            sh 'mvn test -P unit-test'
 
           },
           "Integration": {
