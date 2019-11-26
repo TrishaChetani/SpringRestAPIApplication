@@ -8,7 +8,7 @@ pipeline {
         stage(Fixpermission) {
             agent any
             steps {
-                cleanws()
+                cleanWs();
                 sh "sudo chown root:jenkins /run/docker.sock"
             }
         }
