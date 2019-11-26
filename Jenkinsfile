@@ -1,10 +1,17 @@
 pipeline {
-    agent any
+    agent none
     tools {
         maven 'maven'
         jdk 'java'
     }
     stages {
+         stage("Fix the permission issue") {
+         agent any
+         steps {
+           cleanws()
+            sh "sudo chown root:jenkins /run/docker.sock"
+           }
+        }
         stage(Cleanall) {
         steps {
           sh 'yes | rm -rf ./*'
@@ -25,7 +32,7 @@ pipeline {
         }
         stage(build) {
           steps {
-             sh 'mvn clean'
+             sh 'mvn clean package'
              echo "PATH is: $PATH"
            }
         }
@@ -34,29 +41,31 @@ pipeline {
         parallel(
           "Unit Test": {
             sh 'mvn test'
-
           },
           "Integration": {
             echo 'mvn test -P integration-test'
-
           },
           "Feature": {
             echo 'mvn test -P feature-test'
-
           }
         )
       }
     }
-    stage(Installdependencies) {
+    stage(Dockerize) {
       steps {
         script {
-          def dockerTool = tool name: 'docker', type: 'org.jenkinsci.plugins.docker.commons.tools.DockerTool'
-          withEnv(["DOCKER=${dockerTool}/bin"]) {
-              //stages
-              //here we can trigger: sh "sudo ${DOCKER}/docker ..."
-          }
+           // sh docker-compose
         }
       }
     }
   }
+   post  {
+   success {
+       sh './successNotification.sh'
+    }
+   failure {
+       sh './failureNotification.sh'
+    }
+   }
+}
 }
