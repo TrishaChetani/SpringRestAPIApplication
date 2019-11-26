@@ -8,7 +8,8 @@ pipeline {
         stage(Fixpermission) {
             agent any
             steps {
-                sh 'sudo chown root:jenkins /var/run/docker.sock'
+            //    sh 'sudo chown root:jenkins /var/run/docker.sock'
+                sh 'echo test'
             }
         }
         stage(Cleanall) {
