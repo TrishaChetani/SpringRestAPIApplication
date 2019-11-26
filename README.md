@@ -13,19 +13,27 @@
 
 - GET Ticket
 
-```http://localhost:9090/ticket/getTickets```
+```http://localhost:9090/getTickets```
 - POST ticket
 
-```http://localhost:9090/ticket/bookTickets```
+```http://localhost:9090/bookTickets```
    
    request body post request
 ```
-[
+
 	{
 		"amount":120,
 		"category":"test"
 	}
-]
+
+```
+- DELETE Ticket
+``` 
+http://localhost:9090/remove/{{id}}
+```
+- GET Ticket by Category
+``` 
+http://localhost:9090/getTicketByCategory/{{category}}
 ```
 ### How to Run 
 ```docker-compose up --force-recreate```
