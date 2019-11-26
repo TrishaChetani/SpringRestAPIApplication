@@ -8,7 +8,7 @@ pipeline {
         stage(Fixpermission) {
             agent any
             steps {
-            //    sh 'sudo chown root:jenkins /var/run/docker.sock'
+                sh 'sudo chown root:jenkins /var/run/docker.sock'
                 sh 'echo test'
             }
         }
@@ -20,14 +20,14 @@ pipeline {
         }
        stage(MavenBuild) {
             steps {
-                sh 'mvn clean package'
+                sh 'maven clean package'
             }
         }
         stage(UnitTest) {
             steps {
                 parallel(
                     "Unit Test": {
-                        sh 'mvn test'
+                        sh 'maven clean test'
                     },
                     "Integration": {
                         echo 'mvn test -P integration-test'
