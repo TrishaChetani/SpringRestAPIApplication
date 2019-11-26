@@ -54,13 +54,14 @@ pipeline {
                 }
             }
         }
-        post {
-            always {
-                sh 'echo build success'
-            }
-            failure {
-                sh 'echo build failure'
-            }
+    }
+    post {
+        always {
+            sh 'echo test'
+        }
+        failure {
+            sh 'echo test'
         }
     }
+
 }
