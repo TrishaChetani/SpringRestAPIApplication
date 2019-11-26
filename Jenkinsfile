@@ -5,7 +5,7 @@ pipeline {
         jdk 'java'
     }
     stages {
-        stage("Fix the permission issue") {
+        stage(Fixpermission) {
             agent any
             steps {
                 cleanws()
