@@ -1,6 +1,7 @@
 pipeline {
     agent {
-    docker { image 'openjdk:8-jdk-alpine ' }
+        label 'master'
+    }
     tools {
         maven 'maven'
         jdk 'java'
@@ -10,48 +11,42 @@ pipeline {
             agent any
             steps {
                 sh 'sudo chown root:jenkins /var/run/docker.sock'
-                sh 'echo test'
             }
         }
         stage(CleanAll) {
             steps {
                 cleanWs();
                 sh 'echo test'
-           }
+                      git 'https://github.com/TrishaChetani/SpringRestAPIApplication.git'
+            }
         }
-       stage(MavenBuild) {
+        stage(MavenBuild) {
             steps {
-               sh "mvn -Dmaven.test.failure.ignore=true clean package"
+              sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage(UnitTest) {
             steps {
                 parallel(
                     "Unit Test": {
-                         sh "mvn clean test"
-                    },
-                    "Integration": {
-                        echo 'mvn test -P integration-test'
-                    },
-                    "Feature": {
-                        echo 'mvn test -P feature-test'
+                        sh "mvn clean test"
                     }
                 )
             }
         }
         stage(Dockerize) {
             steps {
-             sh 'echo test'
+                sh "docker-compose up"
+                sh  ""
             }
         }
     }
     post {
-        success {
-          sh 'echo test'
+        always {
+            sh 'echo test'
         }
         failure {
-            sh 'echo test'
+           sh 'echo test'
         }
     }
 }
-
