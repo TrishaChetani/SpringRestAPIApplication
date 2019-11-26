@@ -1,5 +1,8 @@
 pipeline {
-    agent none
+    agent {
+    docker {
+            image 'openjdk:8-jdk-alpine '
+            }
     tools {
         maven 'maven'
         jdk 'java'
