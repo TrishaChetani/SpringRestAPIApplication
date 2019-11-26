@@ -55,9 +55,7 @@ pipeline {
         }
         stage(Dockerize) {
             steps {
-                script {
-                    // sh docker-compose
-                }
+
             }
         }
     }
