@@ -8,31 +8,16 @@ pipeline {
         stage(Fixpermission) {
             agent any
             steps {
-                cleanWs();
-                sh "sudo chown root:jenkins /run/docker.sock"
+                sh "sudo chown root:jenkins /var/run/docker.sock"
             }
         }
         stage(Cleanall) {
             steps {
-                sh 'yes | rm -rf ./*'
-            }
+                cleanWs();
+                sh 'echo test'
+           }
         }
-        stage(Initialize) {
-            steps {
-                sh ''
-                '
-                echo "PATH = ${PATH}"
-                echo "M2_HOME = ${M2_HOME}"
-                ''
-                '
-            }
-        }
-        stage(CheckoutSCM) {
-            steps {
-                git 'https://github.com/TrishaChetani/SpringRestAPIApplication'
-            }
-        }
-        stage(build) {
+       stage(MavenBuild) {
             steps {
                 sh 'mvn clean package'
                 echo "PATH is: $PATH"
@@ -55,16 +40,16 @@ pipeline {
         }
         stage(Dockerize) {
             steps {
-
+             sh 'echo test'
             }
         }
     }
     post {
         success {
-            sh './successNotification.sh'
+          sh 'echo test'
         }
         failure {
-            sh './failureNotification.sh'
+            sh 'echo test'
         }
     }
 }
