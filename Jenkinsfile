@@ -1,4 +1,8 @@
 pipeline {
+    environment {
+        registry = "trisha1212/springticket"
+        registryCredential = 'dockerhub'
+    }
     agent {
         label 'master'
     }
@@ -17,12 +21,12 @@ pipeline {
             steps {
                 cleanWs();
                 sh 'echo test'
-                      git 'https://github.com/TrishaChetani/SpringRestAPIApplication.git'
+                git 'https://github.com/TrishaChetani/SpringRestAPIApplication.git'
             }
         }
         stage(MavenBuild) {
             steps {
-              sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage(UnitTest) {
@@ -34,19 +38,29 @@ pipeline {
                 )
             }
         }
-        stage(Dockerize) {
+        stage(BuildingImage) {
             steps {
-                sh "docker-compose up"
-                sh  ""
+                script {
+                    dockerImage = docker.build registry + ":$BUILD_NUMBER"
+                }
             }
         }
-    }
-    post {
-        always {
-            sh 'echo test'
+        stage(DeployImage) {
+            steps {
+                script {
+                    docker.withRegistry('', registryCredential) {
+                        dockerImage.push()
+                    }
+                }
+            }
         }
-        failure {
-           sh 'echo test'
+        post {
+            always {
+                sh 'echo build success'
+            }
+            failure {
+                sh 'echo build failure'
+            }
         }
     }
 }
