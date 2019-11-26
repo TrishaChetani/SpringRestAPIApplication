@@ -5,15 +5,12 @@ pipeline {
         jdk 'java'
     }
     stages {
-
-       stage('Clean All') {
+        stage(Cleanall) {
         steps {
           sh 'yes | rm -rf ./*'
-
-              }
+         }
        }
-
-        stage ('Initialize') {
+       stage (Initialize) {
             steps {
                 sh '''
                     echo "PATH = ${PATH}"
@@ -21,39 +18,22 @@ pipeline {
                 '''
             }
         }
-
-        stage ('checkout from SCM') {
+        stage (CheckoutSCM) {
             steps {
                  git 'https://github.com/TrishaChetani/SpringRestAPIApplication'
             }
         }
-
-          stage("Checkstyle") {
-                    sh "mvn checkstyle:checkstyle"
-
-                    step([$class: 'CheckStylePublisher',
-                      canRunOnFailed: true,
-                      defaultEncoding: '',
-                      healthy: '100',
-                      pattern: '**/target/checkstyle-result.xml',
-                      unHealthy: '90',
-                      useStableBuildAsReference: true
-                    ])
-                }
-            }
-
-        stage('Build') {
+        stage(build) {
           steps {
-             sh 'mvn clean install -DskipTests'
-
-
+             sh 'mvn clean'
+             echo "PATH is: $PATH"
            }
         }
-        stage('Unit Test') {
+        stage(UnitTest) {
          steps {
         parallel(
           "Unit Test": {
-            sh 'mvn test -P unit-test'
+            sh 'mvn test'
 
           },
           "Integration": {
