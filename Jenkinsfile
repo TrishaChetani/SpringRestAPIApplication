@@ -20,14 +20,14 @@ pipeline {
         }
        stage(MavenBuild) {
             steps {
-                sh 'maven clean package'
+               sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
         stage(UnitTest) {
             steps {
                 parallel(
                     "Unit Test": {
-                        sh 'maven clean test'
+                         sh "mvn clean test"
                     },
                     "Integration": {
                         echo 'mvn test -P integration-test'
