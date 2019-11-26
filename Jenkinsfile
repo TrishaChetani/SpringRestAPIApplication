@@ -8,7 +8,7 @@ pipeline {
         stage(Fixpermission) {
             agent any
             steps {
-                sh "sudo chown root:jenkins /var/run/docker.sock"
+                sh 'sudo chown root:jenkins /var/run/docker.sock'
             }
         }
         stage(Cleanall) {
@@ -20,7 +20,6 @@ pipeline {
        stage(MavenBuild) {
             steps {
                 sh 'mvn clean package'
-                echo "PATH is: $PATH"
             }
         }
         stage(UnitTest) {
