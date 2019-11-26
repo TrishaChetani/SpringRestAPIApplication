@@ -1,21 +1,19 @@
 pipeline {
     agent {
-    docker {
-            image 'openjdk:8-jdk-alpine '
-            }
+    docker { image 'openjdk:8-jdk-alpine ' }
     tools {
         maven 'maven'
         jdk 'java'
     }
     stages {
-        stage(Fixpermission) {
+        stage(FixPermission) {
             agent any
             steps {
                 sh 'sudo chown root:jenkins /var/run/docker.sock'
                 sh 'echo test'
             }
         }
-        stage(Cleanall) {
+        stage(CleanAll) {
             steps {
                 cleanWs();
                 sh 'echo test'
