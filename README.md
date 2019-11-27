@@ -4,11 +4,14 @@
 
 ### ToolsUsed
 
-- Springboot
+- Springboot : actuator, checkstyle
 - Maven
-- docker compose
+- Docker 
 - git
 - Jenkins pipeline
+- micrometer
+- prometheus
+- Swagger documentation 
 
 ### EndPoint
 
@@ -37,9 +40,16 @@ http://localhost:9090/remove/{{id}}
 http://localhost:9090/getTicketByCategory/{{category}}
 ```
 ### How to Run 
+```mvn clean package```
 ```docker-compose up --force-recreate```
 
 ### Monitoring
 ```http://localhost:9090/actuator```
 ```http://localhost:9090/actuator/health```
+```http://localhost:9090/actuator/prometheus```
 
+### API Swagger Documentation
+```http://localhost:9090/swagger-ui.html```
+
+### Checkstyle 
+```mvn checkstyle:checkstyle```

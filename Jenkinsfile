@@ -29,6 +29,12 @@ pipeline {
                 sh "mvn -Dmaven.test.failure.ignore=true clean package"
             }
         }
+        stage(Checkstyle) {
+            steps {
+                sh "mvn checkstyle:checkstyle"
+            }
+        }
+
         stage(UnitTest) {
             steps {
                 parallel(
