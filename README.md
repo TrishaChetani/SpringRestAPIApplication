@@ -8,6 +8,7 @@
 - Maven
 - docker compose
 - git
+- Jenkins pipeline
 
 ### EndPoint
 
