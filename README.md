@@ -12,6 +12,7 @@
 - micrometer
 - prometheus
 - Swagger documentation 
+- Github action on push to master branch
 
 ### CRUD EndPoint
 
@@ -40,6 +41,7 @@ http://localhost:9090/remove/{{id}}
 http://localhost:9090/getTicketByCategory/{{category}}
 ```
 ### Build 
+- Enabled github actions
 ```mvn clean package```
 
 ### Checkstyle 
