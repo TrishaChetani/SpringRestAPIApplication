@@ -1,0 +1,54 @@
+{
+  "consumer": {
+    "name": "Consumer"
+  },
+  "provider": {
+    "name": "Provider"
+  },
+  "interactions": [
+    {
+      "description": "id, amount and category",
+      "providerState": "ticket booking with valid id, amount, category",
+      "request": {
+        "method": "POST",
+        "path": "/bookTickets",
+        "headers": {
+          "Accept": "*/*",
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "amount": 0,
+          "category": "string",
+          "id": 0
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      },
+      "response": {
+        "status": 200,
+        "headers": {
+          "Content-Type": "application/json"
+        },
+        "body": {
+          "id": 5,
+          "amount": 0,
+          "category": "string"
+        },
+        "matchingRules": {
+          "$.body": {
+            "match": "type"
+          }
+        }
+      },
+      "metadata": null
+    }
+  ],
+  "metadata": {
+    "pactSpecification": {
+      "version": "2.0.0"
+    }
+  }
+}g
