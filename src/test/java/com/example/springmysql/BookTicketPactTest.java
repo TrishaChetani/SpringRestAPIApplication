@@ -1,4 +1,4 @@
-/*package com.example.springmysql;
+package com.example.springmysql;
 
 
 import au.com.dius.pact.provider.junit.Provider;
@@ -17,14 +17,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 
 @RunWith(SpringRestPactRunner.class)
-@Provider("Provider")
+@Provider("iProvider")
 @PactFolder("src/test/resources/pacts")
 @SpringBootTest
 //@WebMvcTest(TicketController.class)
 //@TestPropertySource(locations = "classpath:application.properties")
 //@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class BookTicketPactTest {
-  *//*  @TestTarget
+    @TestTarget
     public final Target target = new SpringBootHttpTarget();
 
 
@@ -37,8 +37,8 @@ public class BookTicketPactTest {
     {
         System.out.println("exception @@@@@@@@@@@@@@@@@@@@@"+e);
     }
-    }*//*
-}*/
+    }
+}
 
 
 
