@@ -12,6 +12,7 @@
 - micrometer
 - prometheus
 - Swagger documentation 
+- actuator
 - Github action on push to master branch
 
 ### CRUD EndPoint
