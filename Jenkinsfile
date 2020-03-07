@@ -34,7 +34,7 @@ pipeline {
             steps {
                 parallel(
                     "Unit Test": {
-                        sh "mvn -Pprod -DskipTests clean install"
+                        sh "mvn clean test"
                     }
                 )
             }
@@ -62,7 +62,7 @@ pipeline {
             sh 'echo Success'
         }
         failure {
-            sh 'echo test'
+            sh 'echo Failure'
         }
     }
 
