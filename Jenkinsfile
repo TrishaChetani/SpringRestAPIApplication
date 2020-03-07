@@ -11,12 +11,7 @@ pipeline {
         jdk 'java'
     }
     stages {
-        stage(FixPermission) {
-            agent any
-            steps {
-                sh 'sudo chown root:jenkins /var/run/docker.sock'
-            }
-        }
+       
         stage(CleanAll) {
             steps {
                 cleanWs();
@@ -39,11 +34,12 @@ pipeline {
             steps {
                 parallel(
                     "Unit Test": {
-                        sh "mvn clean test"
+                        sh "mvn -Pprod -DskipTests clean install"
                     }
                 )
             }
         }
+        
         stage(BuildingImage) {
             steps {
                 script {
@@ -63,7 +59,7 @@ pipeline {
     }
     post {
         always {
-            sh 'echo test'
+            sh 'echo Success'
         }
         failure {
             sh 'echo test'
