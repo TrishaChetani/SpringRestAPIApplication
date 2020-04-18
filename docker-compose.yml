@@ -1,10 +1,11 @@
 version: '3'
 services:
   app:
-    restart: on-failure
     build: .
     ports:
       - '9090:9090'
+    expose:
+      - "9090"
     depends_on:
       - mysql
     environment:
@@ -14,11 +15,13 @@ services:
   mysql:
     container_name: mysql
     image: mysql:latest
+    expose:
+      - "3306"
     environment:
       MYSQL_DATABASE: ticket
-      # MYSQL_USER: test
-      #  MYSQL_PASSWORD: password
-      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: test
+      #MYSQL_PASSWORD: password
+      #MYSQL_ROOT_PASSWORD: password
     ports:
       - '3306:3306'
     restart: always
