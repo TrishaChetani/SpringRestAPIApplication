@@ -8,19 +8,19 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3307/ticket
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ticket
       SPRING_DATASOURCE_USERNAME: test
       SPRING_DATASOURCE_PASSWORD: password
   mysql:
-    container_name: some-mysql
+    container_name: mysql
     image: mysql:latest
     environment:
       MYSQL_DATABASE: ticket
-     # MYSQL_USER: test
-    #  MYSQL_PASSWORD: password
+      # MYSQL_USER: test
+      #  MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
     ports:
-      - '3307:3307'
+      - '3306:3306'
     restart: always
 
 
