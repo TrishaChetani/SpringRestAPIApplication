@@ -2,6 +2,8 @@ version: '3'
 services:
   app:
     build: .
+    links:
+      - mysql
     ports:
       - '9090:9090'
     expose:
@@ -9,22 +11,17 @@ services:
     depends_on:
       - mysql
     environment:
-      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ticket
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/ticket?useTimezone=true&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: test
       SPRING_DATASOURCE_PASSWORD: password
   mysql:
-    container_name: mysql
+    container_name: some-mysql
     image: mysql:latest
-    expose:
-      - "3306"
     environment:
       MYSQL_DATABASE: ticket
       MYSQL_USER: test
-      #MYSQL_PASSWORD: password
-      #MYSQL_ROOT_PASSWORD: password
+      MYSQL_PASSWORD: password
+      MYSQL_ROOT_PASSWORD: password
     ports:
       - '3306:3306'
     restart: always
-
-
-
